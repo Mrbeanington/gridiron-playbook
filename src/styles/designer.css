@@ -41,8 +41,6 @@
 .handle{fill:#ffd23f;stroke:#0a0f1c;stroke-width:1.5;cursor:pointer;}
 .handle:hover{fill:#fff;}
 .text-annotation{cursor:move;}
-.text-annotation rect{fill:var(--bg-elevated);stroke:var(--border-strong);}
-.text-annotation text{fill:var(--text-primary);}
 .ball-icon{cursor:grab;}
 
 .designer-right{

@@ -79,7 +79,7 @@ function playerMarkup(pl, selected, branding) {
   return `<g class="player-token${selected ? " selected" : ""}${pl.locked ? " locked" : ""}" data-kind="player" data-id="${pl.id}" transform="translate(${pl.x},${pl.y})">
     ${shape}
     <text x="0" y="5" font-size="12" fill="#fff" font-weight="800" text-anchor="middle" pointer-events="none">${esc(label)}</text>
-    <circle class="player-hit" cx="0" cy="0" r="${r + 6}"></circle>
+    <circle class="player-hit" cx="0" cy="0" r="${r + 6}" fill="transparent"></circle>
   </g>`;
 }
 
@@ -95,7 +95,7 @@ function routeMarkup(route, selected, branding) {
       .join("");
   }
   return `<g class="route-obj" data-kind="route" data-id="${route.id}">
-    <path class="route-path${selected ? " selected" : ""}" d="${d}" stroke="${color}" ${dash}></path>
+    <path class="route-path${selected ? " selected" : ""}" d="${d}" fill="none" stroke="${color}" stroke-width="3" ${dash}></path>
     ${head}
     ${handles}
   </g>`;
@@ -115,19 +115,20 @@ function blockMarkup(block, selected, branding) {
       .join("");
   }
   return `<g class="block-obj" data-kind="block" data-id="${block.id}">
-    ${double ? `<path class="block-path${selected ? " selected" : ""}" d="${d}" stroke="${color}" stroke-width="7" stroke-opacity=".35"></path>` : ""}
-    <path class="block-path${selected ? " selected" : ""}" d="${d}" stroke="${color}" ${dashed ? 'stroke-dasharray="9 5"' : ""}></path>
+    ${double ? `<path class="block-path${selected ? " selected" : ""}" d="${d}" fill="none" stroke="${color}" stroke-width="7" stroke-opacity=".35"></path>` : ""}
+    <path class="block-path${selected ? " selected" : ""}" d="${d}" fill="none" stroke="${color}" stroke-width="4" ${dashed ? 'stroke-dasharray="9 5"' : ""}></path>
     ${head}
     ${textEl(mid.x + 8, mid.y - 6, BLOCK_ABBR[block.type] || "BL", { size: 10, color, weight: 800 })}
     ${handles}
   </g>`;
 }
 
-function motionMarkup(motion, selected, color) {
+function motionMarkup(motion, selected, color, branding) {
   const d = smoothPathD(motion.points);
-  const head = arrowHead(motion.points, color || "var(--motion-color)");
+  const resolvedColor = color || branding.motionColor;
+  const head = arrowHead(motion.points, resolvedColor);
   return `<g class="motion-obj" data-kind="motion" data-id="${motion.id}">
-    <path class="motion-path${selected ? " selected" : ""}" d="${d}" stroke="${color || "var(--motion-color)"}"></path>
+    <path class="motion-path${selected ? " selected" : ""}" d="${d}" fill="none" stroke="${resolvedColor}" stroke-width="2.5" stroke-dasharray="2 5"></path>
     ${head}
   </g>`;
 }
@@ -137,13 +138,13 @@ function shapeMarkup(shape, selected) {
   if (shape.type === "circle") {
     const [c, edge] = shape.points;
     const rr = edge ? Math.hypot(edge.x - c.x, edge.y - c.y) : 30;
-    return `<g class="shape-obj" data-kind="shape" data-id="${shape.id}"><circle cx="${c.x}" cy="${c.y}" r="${rr}" fill="${color}" class="shape-obj" stroke="${color}" stroke-width="2"></circle></g>`;
+    return `<g class="shape-obj" data-kind="shape" data-id="${shape.id}"><circle cx="${c.x}" cy="${c.y}" r="${rr}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="2"></circle></g>`;
   }
   if (shape.type === "rect") {
     const [a, b] = shape.points;
     const x = Math.min(a.x, b.x), y = Math.min(a.y, b.y);
     const w = Math.abs(b.x - a.x), h = Math.abs(b.y - a.y);
-    return `<g class="shape-obj" data-kind="shape" data-id="${shape.id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${color}" class="shape-obj" stroke="${color}" stroke-width="2"></rect></g>`;
+    return `<g class="shape-obj" data-kind="shape" data-id="${shape.id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="2"></rect></g>`;
   }
   if (shape.type === "line" || shape.type === "arrow") {
     const d = straightPathD(shape.points);
@@ -192,7 +193,7 @@ export function renderPlaySvg(play, opts = {}) {
     inner += `<line x1="0" y1="${play.firstDownY}" x2="${width}" y2="${play.firstDownY}" stroke="#ffb703" stroke-width="2" stroke-dasharray="10 6"></line>`;
   }
   inner += (play.shapes || []).map((s) => shapeMarkup(s, sel.has(s.id))).join("");
-  inner += (play.motions || []).map((m) => motionMarkup(m, sel.has(m.id), m.color || branding.motionColor)).join("");
+  inner += (play.motions || []).map((m) => motionMarkup(m, sel.has(m.id), m.color, branding)).join("");
   inner += (play.blocks || []).map((b) => blockMarkup(b, sel.has(b.id), branding)).join("");
   inner += (play.routes || []).map((r) => routeMarkup(r, sel.has(r.id), branding)).join("");
   inner += (play.players || []).map((p) => playerMarkup(p, sel.has(p.id), branding)).join("");
