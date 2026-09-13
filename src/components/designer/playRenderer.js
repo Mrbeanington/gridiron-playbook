@@ -76,8 +76,12 @@ function playerMarkup(pl, selected, branding) {
       <polygon points="0,${-r} ${r},${r} ${-r},${r}" fill="${color}" stroke="#fff" stroke-width="2"></polygon>`;
   }
   const label = pl.label || pl.position;
+  const lockRing = pl.locked
+    ? `<circle cx="0" cy="0" r="${r + 7}" fill="none" stroke="#e2b93b" stroke-width="2" stroke-dasharray="3 3"></circle>`
+    : "";
   return `<g class="player-token${selected ? " selected" : ""}${pl.locked ? " locked" : ""}" data-kind="player" data-id="${pl.id}" transform="translate(${pl.x},${pl.y})">
     ${shape}
+    ${lockRing}
     <text x="0" y="5" font-size="12" fill="#fff" font-weight="800" text-anchor="middle" pointer-events="none">${esc(label)}</text>
     <circle class="player-hit" cx="0" cy="0" r="${r + 6}" fill="transparent"></circle>
   </g>`;

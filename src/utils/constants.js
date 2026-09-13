@@ -4,6 +4,7 @@ export const SCHEMA_VERSION = 1;
 export const FIELD = {
   WIDTH: 533,
   VIEWS: {
+    window20: { length: 200, endzone: 0, label: "20-Yard Window" },
     full: { length: 1200, endzone: 100, label: "Full Field" },
     half: { length: 650, endzone: 100, label: "Half Field" },
     redzone: { length: 320, endzone: 100, label: "Red Zone" },

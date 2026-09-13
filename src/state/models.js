@@ -20,7 +20,7 @@ export function createPlayer(tpl, ballX, losY) {
 
 export function newPlay(overrides = {}) {
   const category = overrides.category || "offense";
-  const fieldView = overrides.fieldView || "full";
+  const fieldView = overrides.fieldView || "window20";
   const length = FIELD.VIEWS[fieldView].length;
   const losY = overrides.lineOfScrimmageY ?? Math.round(length * 0.62);
   const ballX = FIELD.WIDTH / 2;

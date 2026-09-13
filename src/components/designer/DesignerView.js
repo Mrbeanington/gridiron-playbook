@@ -56,6 +56,7 @@ export function openNewPlayModal() {
       </div>
       <div class="field"><label>Field View</label>
         <select data-f="fieldView">
+          <option value="window20" selected>20-Yard Window (recommended to start)</option>
           <option value="full">Full Field</option>
           <option value="half">Half Field</option>
           <option value="redzone">Red Zone</option>

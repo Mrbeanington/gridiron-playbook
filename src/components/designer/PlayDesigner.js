@@ -451,7 +451,10 @@ export function mountPlayDesigner(container, playId) {
     const ids = local.selectedIds.filter((id) => play.players.some((p) => p.id === id));
     if (!ids.length) return;
     const startPositions = play.players.filter((p) => ids.includes(p.id)).map((p) => ({ id: p.id, x: p.x, y: p.y }));
-    if (play.players.find((p) => ids.includes(p.id) && p.locked)) return;
+    if (play.players.find((p) => ids.includes(p.id) && p.locked)) {
+      toast("That player is locked. Unlock it in the panel to move it.");
+      return;
+    }
     let moved = false;
     beginPointerTracking(
       (svg, e2) => {
@@ -608,6 +611,10 @@ export function mountPlayDesigner(container, playId) {
   }
 
   function renderRight() {
+    if (local.selectedIds.length > 1) {
+      renderMultiSelectPanel();
+      return;
+    }
     const sel = findSelectedObject();
     if (!sel) {
       renderPlayInfoPanel();
@@ -752,6 +759,41 @@ export function mountPlayDesigner(container, playId) {
 
   function renderBallPanel() {
     panelWrap("Football", `<div class="prop-section"><p class="hint">Drag the ball on the field to mark the snap point, handoff, or pass target.</p></div>`);
+  }
+
+  function renderMultiSelectPanel() {
+    const ids = new Set(local.selectedIds);
+    const selectedPlayers = play.players.filter((p) => ids.has(p.id));
+    const lockedCount = selectedPlayers.filter((p) => p.locked).length;
+    panelWrap(`${local.selectedIds.length} Selected`, `
+      <div class="prop-section">
+        ${
+          selectedPlayers.length
+            ? `<p class="hint">${selectedPlayers.length} player${selectedPlayers.length === 1 ? "" : "s"} in this selection — ${lockedCount} currently locked. Shift+click to add or remove players from the selection.</p>`
+            : `<p class="hint">${local.selectedIds.length} objects selected. Shift+click to add or remove from the selection.</p>`
+        }
+      </div>
+      <div class="prop-section flex-col gap-8">
+        ${
+          selectedPlayers.length
+            ? `<button class="btn btn-sm btn-block" data-action="lockAll">🔒 Lock Selected Players</button>
+        <button class="btn btn-sm btn-block" data-action="unlockAll">🔓 Unlock Selected Players</button>`
+            : ""
+        }
+        <button class="btn btn-sm btn-danger btn-block" data-action="deleteAll">Delete Selected</button>
+      </div>
+    `);
+    const lockBtn = els.right.querySelector('[data-action="lockAll"]');
+    if (lockBtn) lockBtn.addEventListener("click", () => {
+      commit((p) => { p.players.forEach((pl) => { if (ids.has(pl.id)) pl.locked = true; }); });
+      toast(`Locked ${selectedPlayers.length} player${selectedPlayers.length === 1 ? "" : "s"}`, "success");
+    });
+    const unlockBtn = els.right.querySelector('[data-action="unlockAll"]');
+    if (unlockBtn) unlockBtn.addEventListener("click", () => {
+      commit((p) => { p.players.forEach((pl) => { if (ids.has(pl.id)) pl.locked = false; }); });
+      toast(`Unlocked ${selectedPlayers.length} player${selectedPlayers.length === 1 ? "" : "s"}`, "success");
+    });
+    els.right.querySelector('[data-action="deleteAll"]').addEventListener("click", deleteSelected);
   }
 
   // Text-like fields update live (on "input") WITHOUT re-rendering — so the
