@@ -1,5 +1,7 @@
 # Gridiron Playbook — Football Playbook Designer
 
+**[Open the app](https://mrbeanington.github.io/gridiron-playbook/)** · **[New here? Start with the Field Guide](https://claude.ai/code/artifact/dab6784d-b1f5-4a23-9a01-d085a6dd6d5f)** (plain-English setup for PC and iPhone — no tech background needed)
+
 A complete, self-contained football play designer and playbook builder that runs entirely in
 the browser. Build offensive, defensive, and special-teams plays with a real SVG field canvas
 (players, routes, blocking assignments, motion, and coaching annotations), organize them into
