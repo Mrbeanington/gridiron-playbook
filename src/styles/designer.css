@@ -65,8 +65,22 @@
   .designer-right{width:250px;}
 }
 @media (max-width: 880px){
-  .designer{flex-direction:column;}
-  .designer-toolbar{width:100%;flex-direction:row;justify-content:flex-start;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border-subtle);}
+  /* On a phone the three panes (tools / canvas / play info) can't all fit
+     on screen at once like they do on desktop. Instead of squeezing them
+     into a fixed-height row (which was crushing the canvas to nothing),
+     stack them and let the page scroll: the toolbar stays pinned to the
+     top so switching tools never requires scrolling back up, the canvas
+     gets a fixed, guaranteed-visible height of its own, and the play-info
+     panel simply flows below and can be as tall as it needs to be. */
+  .view-body.no-scroll{overflow-y:auto !important;-webkit-overflow-scrolling:touch;}
+  .designer{flex-direction:column;height:auto;min-height:100%;}
+  .designer-toolbar{
+    width:100%;flex:0 0 auto;flex-direction:row;justify-content:flex-start;overflow-x:auto;
+    border-right:none;border-bottom:1px solid var(--border-subtle);
+    position:sticky;top:0;z-index:20;
+  }
   .tool-sep{width:1px;height:32px;margin:0 4px;}
-  .designer-right{width:100%;border-left:none;border-top:1px solid var(--border-subtle);}
+  .designer-center{flex:0 0 auto;}
+  .canvas-scroll{height:54vh;flex:0 0 auto;padding:12px;}
+  .designer-right{width:100%;flex:0 0 auto;border-left:none;border-top:1px solid var(--border-subtle);max-height:none;}
 }
