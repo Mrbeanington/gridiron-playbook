@@ -1,0 +1,76 @@
+/* Loaded with media="print" — everything here applies only while printing. */
+@page{ size: letter portrait; margin: 0; }
+
+html, body{ background:#fff !important; }
+#print-root{
+  display:block !important;
+  background:#fff;
+  color:#000;
+}
+
+.print-page{
+  width:8.5in;
+  height:11in;
+  padding:0.55in 0.5in 0.55in 1in; /* extra-large left margin for 3-ring binder punches */
+  page-break-after:always;
+  break-after:page;
+  position:relative;
+  background:#fff;
+  color:#111;
+  font-family: var(--font-ui, Arial, sans-serif);
+  overflow:hidden;
+  box-sizing:border-box;
+}
+.print-page:last-child{page-break-after:auto;}
+.print-page.bw *{ color:#111 !important; }
+.print-page.bw svg *{ filter:grayscale(1) !important; }
+
+.print-page .punch-guides{position:absolute;left:0.28in;top:0;bottom:0;width:0;border-left:1px dashed #ccc;}
+.print-page .page-number{position:absolute;bottom:0.28in;right:0.5in;font-size:9pt;color:#555;}
+.print-page .page-footer-label{position:absolute;bottom:0.28in;left:1in;font-size:9pt;color:#555;}
+
+/* Cover page */
+.cover-page{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;}
+.cover-page .cover-logo{max-width:180px;max-height:180px;margin-bottom:22px;object-fit:contain;}
+.cover-page .cover-team{font-size:30pt;font-weight:800;letter-spacing:.02em;margin:0;}
+.cover-page .cover-title{font-size:16pt;font-weight:600;color:#333;margin:6px 0 0;}
+.cover-page .cover-season{font-size:12pt;color:#555;margin-top:18px;}
+.cover-page .cover-coach{font-size:11pt;color:#555;margin-top:4px;}
+.cover-page .cover-bar{width:120px;height:5px;margin:22px 0;border-radius:3px;}
+
+/* Table of contents */
+.toc-page h1{font-size:18pt;border-bottom:2px solid #222;padding-bottom:8px;margin-bottom:16px;}
+.toc-list{list-style:none;padding:0;margin:0;font-size:11pt;}
+.toc-section-heading{font-weight:800;text-transform:uppercase;font-size:10.5pt;letter-spacing:.05em;margin:14px 0 4px;color:#333;}
+.toc-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dotted #bbb;}
+.toc-row .toc-page-num{color:#555;}
+
+/* Section divider */
+.section-divider-page{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;height:100%;}
+.section-divider-page .divider-bar{width:70px;height:8px;border-radius:4px;margin-bottom:16px;}
+.section-divider-page h1{font-size:26pt;margin:0;}
+.section-divider-page p{color:#555;font-size:12pt;}
+
+/* Play page */
+.play-print-page .play-print-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #222;padding-bottom:8px;margin-bottom:10px;}
+.play-print-page .play-print-title{font-size:17pt;font-weight:800;margin:0;}
+.play-print-page .play-print-sub{font-size:10pt;color:#444;margin-top:2px;}
+.play-print-page .play-print-number{font-size:22pt;font-weight:800;color:#333;}
+.play-print-page .meta-strip{display:flex;flex-wrap:wrap;gap:10px;font-size:9pt;margin-bottom:10px;}
+.play-print-page .meta-chip{border:1px solid #999;border-radius:10px;padding:2px 9px;color:#333;}
+.play-print-page .play-print-body{display:flex;gap:14px;}
+.play-print-page .play-print-diagram{flex:1.3;border:1px solid #ccc;border-radius:4px;overflow:hidden;background:#0c3b1f;}
+.play-print-page .play-print-diagram svg{width:100%;height:auto;display:block;}
+.play-print-page .play-print-side{flex:1;font-size:9.5pt;}
+.play-print-page .side-block{margin-bottom:10px;}
+.play-print-page .side-block h4{font-size:9.5pt;text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px;border-bottom:1px solid #ccc;padding-bottom:2px;}
+.play-print-page .side-block ul{margin:0;padding-left:16px;}
+.play-print-page .side-block li{margin-bottom:2px;}
+.play-print-page.diagram-only .play-print-side{display:none;}
+.play-print-page.diagram-only .play-print-diagram{flex:1;}
+
+.notes-page h1{font-size:16pt;border-bottom:2px solid #222;padding-bottom:6px;}
+.notes-page .notes-lines{margin-top:20px;background-image:repeating-linear-gradient(to bottom, transparent, transparent 27px, #ccc 28px);}
+.notes-page .notes-lines{height:8.5in;}
+
+.blank-page{}

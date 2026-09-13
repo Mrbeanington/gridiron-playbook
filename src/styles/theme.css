@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Theme tokens — light/dark. Team branding overrides these via inline
+   custom properties on :root (see state/branding.js).
+   ========================================================================== */
+:root{
+  --navy-950:#0a0f1c;
+  --navy-900:#0d1526;
+  --navy-800:#121d33;
+  --navy-700:#182541;
+  --navy-600:#22335a;
+  --field-green:#1e5c33;
+  --field-green-dark:#164726;
+  --white:#f5f7fa;
+  --red-accent:#d5342e;
+
+  --bg-app:#eef1f5;
+  --bg-surface:#ffffff;
+  --bg-surface-2:#f4f6f9;
+  --bg-elevated:#ffffff;
+  --bg-hover:#eef2f7;
+  --border-subtle:#dde3ec;
+  --border-strong:#c3cbd8;
+  --text-primary:#12182a;
+  --text-secondary:#4b5568;
+  --text-muted:#7b8496;
+  --text-inverse:#f5f7fa;
+
+  --accent:#1e5c33;
+  --accent-hover:#164726;
+  --accent-contrast:#ffffff;
+  --danger:#c22b26;
+  --danger-hover:#a12220;
+  --warning:#b8791a;
+  --info:#2563a8;
+
+  --offense-color:#2455c4;
+  --defense-color:#c22b26;
+  --ball-color:#5b3a1e;
+  --route-color:#0f7a3d;
+  --block-color:#8a4b0d;
+  --motion-color:#7a3ac2;
+  --read-color:#c47a0f;
+
+  --shadow-sm:0 1px 2px rgba(20,26,40,.08);
+  --shadow-md:0 4px 14px rgba(20,26,40,.12);
+  --shadow-lg:0 12px 32px rgba(20,26,40,.18);
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", Consolas, "Courier New", monospace;
+  --sidebar-w: 232px;
+}
+
+:root[data-theme="dark"]{
+  --bg-app:#0a0f1c;
+  --bg-surface:#111a2d;
+  --bg-surface-2:#0d1526;
+  --bg-elevated:#182541;
+  --bg-hover:#1c2a4a;
+  --border-subtle:#22335a;
+  --border-strong:#2e4470;
+  --text-primary:#f0f3f8;
+  --text-secondary:#aab4c8;
+  --text-muted:#7683a0;
+  --text-inverse:#0a0f1c;
+
+  --accent:#3aa563;
+  --accent-hover:#4bc077;
+  --accent-contrast:#08130c;
+  --offense-color:#5b8def;
+  --defense-color:#ef5b56;
+  --route-color:#3ecf7d;
+  --block-color:#e0a24d;
+  --motion-color:#b285f0;
+  --read-color:#f0c04d;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:0 4px 14px rgba(0,0,0,.4);
+  --shadow-lg:0 16px 40px rgba(0,0,0,.5);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg-app:#0a0f1c;
+    --bg-surface:#111a2d;
+    --bg-surface-2:#0d1526;
+    --bg-elevated:#182541;
+    --bg-hover:#1c2a4a;
+    --border-subtle:#22335a;
+    --border-strong:#2e4470;
+    --text-primary:#f0f3f8;
+    --text-secondary:#aab4c8;
+    --text-muted:#7683a0;
+    --text-inverse:#0a0f1c;
+    --accent:#3aa563;
+    --accent-hover:#4bc077;
+    --accent-contrast:#08130c;
+    --offense-color:#5b8def;
+    --defense-color:#ef5b56;
+    --route-color:#3ecf7d;
+    --block-color:#e0a24d;
+    --motion-color:#b285f0;
+    --read-color:#f0c04d;
+  }
+}
