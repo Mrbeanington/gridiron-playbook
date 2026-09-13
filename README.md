@@ -14,11 +14,13 @@ completely offline once loaded.
 
 ## Features
 
-- **Play Designer** — SVG field canvas (full field / half field / red zone / goal line,
-  vertical or horizontal orientation) with draggable offensive and defensive players,
-  a route tool (25 preset route concepts + fully custom click-to-draw routes), a blocking
-  tool (15 block/protection types with distinct line styles), a motion tool, zones/shapes,
-  freehand drawing, text annotations, and a football marker.
+- **Play Designer** — SVG field canvas (20-yard window by default, or full field / half field /
+  red zone / goal line, vertical or horizontal orientation) with draggable offensive and
+  defensive players, a route tool (25 preset route concepts + fully custom click-to-draw
+  routes), a blocking tool (15 block/protection types with distinct line styles), a motion
+  tool, zones/shapes, freehand drawing, text annotations, and a football marker. Players can
+  be locked individually or as a group (Shift+click to multi-select, then Lock Selected) to
+  stop them from being dragged by accident.
 - **Undo/redo**, keyboard shortcuts (Ctrl/Cmd+Z, Ctrl/Cmd+D, Delete, Escape, Enter/double-click
   to finish a path), snap-to-grid, zoom/fit/fullscreen.
 - **Formations gallery** — 20 offensive formations and 8 defensive fronts you can drop onto
@@ -32,7 +34,8 @@ completely offline once loaded.
   table of contents, section dividers, notes/blank pages, and drag-and-drop page ordering.
 - **Installation Plan** — group plays into install days/sessions with per-play notes.
 - **Printing** — dedicated print stylesheet that produces an actual binder-ready playbook on
-  US Letter paper (extra-wide left margin for 3-ring binder holes), with color/black-and-white
+  US Letter paper, printed landscape (matching how most physical playbooks are laid out, with
+  the extra-wide binder margin along the top edge to match), with color/black-and-white
   and diagram-only/full-detail options. "Print" uses the real browser print dialog, so choosing
   "Save as PDF" there gives you a PDF with zero extra dependencies.
 - **Export/Import** — PNG export of any individual play diagram (canvas-rendered, not a
@@ -156,7 +159,11 @@ than crashing.
   PDF* in the print dialog) rather than a bundled PDF library — this was a deliberate choice for
   reliability on a static, dependency-free site, per the brief.
 - Marquee (drag-to-select-many) selection isn't implemented; multi-select uses Shift+Click,
-  which supports group move/delete for players.
+  which supports group move/delete/lock/unlock for players.
+- The print layout uses one flexible diagram box for every field-view choice, so a play using
+  a very wide crop (like the default 20-Yard Window) may show a little letterboxing above/below
+  the diagram on the printed page rather than filling the box edge-to-edge. It's still far
+  larger and clearer than a naive fit — just not pixel-perfect for every aspect ratio.
 - Formation/route/blocking presets cover the concepts listed in the brief as ready-made
   starting points; because the drawing, blocking, and annotation tools are fully general, any
   additional named concept can still be created by hand and labeled freely.
